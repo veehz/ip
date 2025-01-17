@@ -11,3 +11,10 @@
     - Super useful and accurate, with details that as a human is quite tedious to write.
     - Sometimes too much details.
     - Sometimes will be completely wrong, but is very rare.
+4. Use Copilot (Chat) for Refactoring to include Enums (Tag A-Enums).
+    - The main idea is there, but a lot of tiny details are wrong. Basically the whole code needs to be checked again.
+    - For example, in a commit a change was used to make a "task" variable a static class member,
+        however the refactored code did not reflect this change.
+    - The list command was completely removed during the refactoring.
+    - The use of exceptions is also not consistent. Therefore, I have created a new UnexpectedException type.
+    - Still heavily unreliable and needs a lot of manual work (~15 minutes after first prompt to refactor).

@@ -11,7 +11,7 @@ What can I do for you?
 [You]
 
 [MaidChan]
-Here are the tasks in your list:
+You have no tasks in the list.
 
 [You]
 
@@ -172,7 +172,7 @@ Error: Deadline description must contain exactly one /by
 [You]
 
 [MaidChan]
-Error: The description of a task cannot be empty.
+Error: The description of a todo cannot be empty.
 
 [You]
 

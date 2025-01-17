@@ -1,4 +1,5 @@
 import exceptions.CommandNotFoundException;
+import exceptions.MaidChanUnexpectedException;
 import exceptions.TaskException;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,19 +9,10 @@ import task.Event;
 import task.Task;
 import task.ToDo;
 
-/**
- * The main class of MaidChan. MaidChan is a simple chatbot that helps you manage your tasks.
- */
 public class MaidChan {
-    /** The name of MaidChan. */
     private static String name = "MaidChan";
     private static ArrayList<Task> tasks;
 
-    /**
-     * The entry point of MaidChan.
-     *
-     * @param args the command-line arguments
-     */
     public static void main(String[] args) {
         String logo = " __  __       _     _  ____ _\n"
                 + "|  \\/  | __ _(_) __| |/ ___| |__   __ _ _ __\n"
@@ -50,10 +42,13 @@ public class MaidChan {
 
             try {
                 handleInput(input);
-            } catch (CommandNotFoundException e) {
-                sendMessage(e.getMessage());
             } catch (TaskException e) {
                 sendMessage("Error: " + e.getMessage());
+            } catch (CommandNotFoundException e) {
+                // e.getMessage() is the command that was not found
+                sendMessage("I don't understand you (yet).");
+            } catch (MaidChanUnexpectedException e) {
+                sendMessage("An unexpected error occurred: " + e.getMessage());
             }
         }
 
@@ -62,71 +57,106 @@ public class MaidChan {
     }
 
     private static void handleInput(String input) throws CommandNotFoundException, TaskException {
-        String command = input.split(" ")[0];
+        String[] parts = input.split(" ", 2);
+        Command command = Command.fromString(parts[0]);
 
-        if (command.equals("list")) {
-            ArrayList<String> messages = new ArrayList<>();
-            messages.add("Here are the tasks in your list:");
-            for (int i = 0; i < tasks.size(); i++) {
-                messages.add("\t" + (i + 1) + ". " + tasks.get(i).toString());
-            }
-            sendMessage(messages);
-            return;
+
+        switch (command) {
+            case LIST:
+                if (tasks.isEmpty()) {
+                    sendMessage("You have no tasks in the list.");
+                } else {
+                    ArrayList<String> messages = new ArrayList<>();
+                    messages.add("Here are the tasks in your list:");
+                    for (int i = 0; i < tasks.size(); i++) {
+                        messages.add("\t" + (i + 1) + ". " + tasks.get(i).toString());
+                    }
+                    sendMessage(messages);
+                }
+                break;
+            case MARK:
+            case UNMARK:
+            case DELETE:
+                handleTaskModification(command, parts);
+                break;
+            case TODO:
+            case DEADLINE:
+            case EVENT:
+                handleTaskCreation(command, parts);
+                break;
+            default:
+                // All commands should have been handled; invalid commands are caught in
+                // Command.fromString()
+                throw new MaidChanUnexpectedException("Command not handled: " + command);
+        }
+    }
+
+    private static void handleTaskModification(Command command, String[] parts)
+            throws TaskException {
+        if (parts.length != 2) {
+            throw new TaskException(
+                    "Please specify a task number to " + command.toString().toLowerCase() + ".");
         }
 
-        if (command.equals("mark") || command.equals("unmark") || command.equals("delete")) {
-            String[] parts = input.split(" ");
-            if (parts.length != 2) {
-                throw new TaskException("Please specify a task number to " + command + ".");
-            }
+        int taskNumber;
+        try {
+            taskNumber = Integer.parseInt(parts[1]);
+        } catch (NumberFormatException e) {
+            throw new TaskException("Please specify a valid task number to "
+                    + command.toString().toLowerCase() + ".");
+        }
+        if (taskNumber < 1 || taskNumber > tasks.size()) {
+            throw new TaskException("Task number out of range.");
+        }
 
-            int taskNumber;
-            try {
-                taskNumber = Integer.parseInt(parts[1]);
-            } catch (NumberFormatException e) {
-                throw new TaskException("Please specify a valid task number to " + command + ".");
-            }
-            if (taskNumber < 1 || taskNumber > tasks.size()) {
-                throw new TaskException("Task number out of range.");
-            }
-
-            if (command.equals("mark")) {
-                tasks.get(taskNumber - 1).mark();
-                sendMessage("Nice! I've marked this task as done:\n\t"
-                        + tasks.get(taskNumber - 1).toString());
-            } else if (command.equals("unmark")) {
-                tasks.get(taskNumber - 1).unmark();
-                sendMessage("Nice! I've unmarked this task:\n\t"
-                        + tasks.get(taskNumber - 1).toString());
-            } else {
+        Task task = tasks.get(taskNumber - 1);
+        switch (command) {
+            case MARK:
+                task.mark();
+                sendMessage("Nice! I've marked this task as done:\n\t" + task.toString());
+                break;
+            case UNMARK:
+                task.unmark();
+                sendMessage("Nice! I've unmarked this task:\n\t" + task.toString());
+                break;
+            case DELETE:
                 tasks.remove(taskNumber - 1);
-                sendMessage(
-                        "Noted. I've removed this task:\n\t" + tasks.get(taskNumber - 1).toString()
-                                + "\nNow you have " + tasks.size() + " tasks in the list.");
-            }
-            return;
+                sendMessage("Noted. I've removed this task:\n\t" + task.toString()
+                        + "\nNow you have " + tasks.size() + " tasks in the list.");
+                break;
+            default:
+                throw new MaidChanUnexpectedException(
+                        "Command (task modification) not handled: " + command);
+        }
+    }
+
+    private static void handleTaskCreation(Command command, String[] parts) throws TaskException {
+        if (parts.length != 2) {
+            throw new TaskException("The description of a " + command.toString().toLowerCase()
+                    + " cannot be empty.");
         }
 
-        if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
-            Task toAddTask = null;
+        Task toAddTask;
+        String description = parts[1];
 
-            String description = input.substring(command.length()).trim();
-            if (command.equals("todo")) {
+        switch (command) {
+            case TODO:
                 toAddTask = new ToDo(description);
-            } else if (command.equals("deadline")) {
+                break;
+            case DEADLINE:
                 toAddTask = new Deadline(description);
-            } else if (command.equals("event")) {
+                break;
+            case EVENT:
                 toAddTask = new Event(description);
-            }
-
-            tasks.add(toAddTask);
-            sendMessage("Got it. I've added this task:\n\t" + toAddTask.toString() + "\n"
-                    + "Now you have " + tasks.size() + " tasks in the list.");
-            return;
+                break;
+            default:
+                throw new MaidChanUnexpectedException(
+                        "Command (task creation) not handled: " + command);
         }
 
-        // sendMessage("I don't understand you (yet).");
-        throw new CommandNotFoundException("I don't understand you (yet).");
+        tasks.add(toAddTask);
+        sendMessage("Got it. I've added this task:\n\t" + toAddTask.toString() + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.");
     }
 
     private static void sendMessage(String message) {
