@@ -15,7 +15,7 @@ public class MaidChan {
             "What can I do for you?"
         ));
 
-        ArrayList<String> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
 
         while(true) {
             System.out.println("[You]");
@@ -33,13 +33,13 @@ public class MaidChan {
                 ArrayList<String> messages = new ArrayList<>();
                 messages.add("Here are the tasks in your list:");
                 for (int i = 0; i < tasks.size(); i++) {
-                    messages.add((i + 1) + ". " + tasks.get(i));
+                    messages.add((i + 1) + ". " + tasks.get(i).toString());
                 }
                 sendMessage(messages);
                 continue;
             }
 
-            tasks.add(input);
+            tasks.add(new Task(input));
 
             sendMessage("Added a task: " + input);
         }
