@@ -9,12 +9,12 @@ import task.Task;
 import task.ToDo;
 
 /**
- * The main class of MaidChan.
- * MaidChan is a simple chatbot that helps you manage your tasks.
+ * The main class of MaidChan. MaidChan is a simple chatbot that helps you manage your tasks.
  */
 public class MaidChan {
     /** The name of MaidChan. */
     private static String name = "MaidChan";
+    private static ArrayList<Task> tasks;
 
     /**
      * The entry point of MaidChan.
@@ -31,7 +31,7 @@ public class MaidChan {
         System.out.println(logo);
         sendMessage(List.of("Hello! I'm " + MaidChan.name + ".", "What can I do for you?"));
 
-        ArrayList<Task> tasks = new ArrayList<>();
+        tasks = new ArrayList<>();
 
         while (true) {
             System.out.println("[You]");
@@ -49,7 +49,7 @@ public class MaidChan {
             }
 
             try {
-                handleInput(tasks, input);
+                handleInput(input);
             } catch (CommandNotFoundException e) {
                 sendMessage(e.getMessage());
             } catch (TaskException e) {
@@ -61,9 +61,10 @@ public class MaidChan {
         scanner.close();
     }
 
-    private static void handleInput(ArrayList<Task> tasks, String input)
-            throws CommandNotFoundException, TaskException {
-        if (input.equals("list")) {
+    private static void handleInput(String input) throws CommandNotFoundException, TaskException {
+        String command = input.split(" ")[0];
+
+        if (command.equals("list")) {
             ArrayList<String> messages = new ArrayList<>();
             messages.add("Here are the tasks in your list:");
             for (int i = 0; i < tasks.size(); i++) {
@@ -73,10 +74,10 @@ public class MaidChan {
             return;
         }
 
-        if (input.startsWith("mark")) {
+        if (command.equals("mark") || command.equals("unmark") || command.equals("delete")) {
             String[] parts = input.split(" ");
             if (parts.length != 2) {
-                throw new TaskException("Please specify a task number to mark.");
+                throw new TaskException("Please specify a task number to " + command + ".");
             }
 
             int taskNumber = Integer.parseInt(parts[1]);
@@ -84,47 +85,35 @@ public class MaidChan {
                 throw new TaskException("Task number out of range.");
             }
 
-            tasks.get(taskNumber - 1).mark();
-            sendMessage("Nice! I've marked this task as done:\n\t"
-                    + tasks.get(taskNumber - 1).toString());
+            if (command.equals("mark")) {
+                tasks.get(taskNumber - 1).mark();
+                sendMessage("Nice! I've marked this task as done:\n\t"
+                        + tasks.get(taskNumber - 1).toString());
+            } else if (command.equals("unmark")) {
+                tasks.get(taskNumber - 1).unmark();
+                sendMessage("Nice! I've unmarked this task:\n\t"
+                        + tasks.get(taskNumber - 1).toString());
+            } else {
+                tasks.remove(taskNumber - 1);
+                sendMessage(
+                        "Noted. I've removed this task:\n\t" + tasks.get(taskNumber - 1).toString()
+                                + "\nNow you have " + tasks.size() + " tasks in the list.");
+            }
             return;
         }
 
-        if (input.startsWith("unmark")) {
-            String[] parts = input.split(" ");
-            if (parts.length != 2) {
-                throw new TaskException("Please specify a task number to unmark.");
+        if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
+            Task toAddTask = null;
+
+            String description = input.substring(command.length()).trim();
+            if (command.equals("todo")) {
+                toAddTask = new ToDo(description);
+            } else if (command.equals("deadline")) {
+                toAddTask = new Deadline(description);
+            } else if (command.equals("event")) {
+                toAddTask = new Event(description);
             }
 
-            int taskNumber = Integer.parseInt(parts[1]);
-            if (taskNumber < 1 || taskNumber > tasks.size()) {
-                throw new TaskException("Task number out of range.");
-            }
-
-            tasks.get(taskNumber - 1).unmark();
-            sendMessage(
-                    "Nice! I've unmarked this task:\n\t" + tasks.get(taskNumber - 1).toString());
-            return;
-        }
-
-        Task toAddTask = null;
-
-        if (input.startsWith("todo")) {
-            String description = input.substring("todo".length());
-            toAddTask = new ToDo(description);
-        }
-
-        if (input.startsWith("deadline")) {
-            String description = input.substring("deadline".length());
-            toAddTask = new Deadline(description);
-        }
-
-        if (input.startsWith("event")) {
-            String description = input.substring("event".length());
-            toAddTask = new Event(description);
-        }
-
-        if (toAddTask != null) {
             tasks.add(toAddTask);
             sendMessage("Got it. I've added this task:\n\t" + toAddTask.toString() + "\n"
                     + "Now you have " + tasks.size() + " tasks in the list.");
