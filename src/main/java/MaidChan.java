@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class MaidChan {
@@ -14,6 +15,8 @@ public class MaidChan {
             "What can I do for you?"
         ));
 
+        ArrayList<String> tasks = new ArrayList<>();
+
         while(true) {
             System.out.println("[You]");
             String input = System.console().readLine();
@@ -26,7 +29,19 @@ public class MaidChan {
                 break;
             }
 
-            sendMessage(input);
+            if(input.equals("list")) {
+                ArrayList<String> messages = new ArrayList<>();
+                messages.add("Here are the tasks in your list:");
+                for (int i = 0; i < tasks.size(); i++) {
+                    messages.add((i + 1) + ". " + tasks.get(i));
+                }
+                sendMessage(messages);
+                continue;
+            }
+
+            tasks.add(input);
+
+            sendMessage("Added a task: " + input);
         }
 
         sendMessage("Bye. Hope to see you again soon!");
