@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import task.*;
+import java.util.Scanner;
 
 public class MaidChan {
     private static String name = "MaidChan";
@@ -10,6 +11,7 @@ public class MaidChan {
                     + "| |\\/| |/ _` | |/ _` | |   | '_ \\ / _` | '_ \\\n"
                     + "| |  | | (_| | | (_| | |___| | | | (_| | | | |\n"
                     + "|_|  |_|\\__,_|_|\\__,_|\\____|_| |_|\\__,_|_| |_|\n";
+        Scanner scanner = new Scanner(System.in);
         System.out.println(logo);
         sendMessage(List.of(
             "Hello! I'm " + MaidChan.name + ".",
@@ -20,7 +22,10 @@ public class MaidChan {
 
         while(true) {
             System.out.println("[You]");
-            String input = System.console().readLine();
+            if(!scanner.hasNextLine()) { // Break if no more input
+                break;
+            }
+            String input = scanner.nextLine();
             if(input == null || input.isEmpty()) {
                 continue;
             }
@@ -34,7 +39,7 @@ public class MaidChan {
                 ArrayList<String> messages = new ArrayList<>();
                 messages.add("Here are the tasks in your list:");
                 for (int i = 0; i < tasks.size(); i++) {
-                    messages.add((i + 1) + ". " + tasks.get(i).toString());
+                    messages.add("\t" + (i + 1) + ". " + tasks.get(i).toString());
                 }
                 sendMessage(messages);
                 continue;
@@ -95,8 +100,8 @@ public class MaidChan {
 
             if(toAddTask != null) {
                 tasks.add(toAddTask);
-                sendMessage("Got it. I've added this task:\n\t" + toAddTask.toString());
-                sendMessage("Now you have " + tasks.size() + " tasks in the list.");
+                sendMessage("Got it. I've added this task:\n\t" + toAddTask.toString() + "\n" +
+                            "Now you have " + tasks.size() + " tasks in the list.");
                 continue;
             }
 
@@ -104,6 +109,7 @@ public class MaidChan {
         }
 
         sendMessage("Bye. Hope to see you again soon!");
+        scanner.close();
     }
 
     private static void sendMessage(String message) {
