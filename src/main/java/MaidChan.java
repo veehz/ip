@@ -5,7 +5,17 @@ public class MaidChan {
                     + "| |\\/| |/ _` | |/ _` | |   | '_ \\ / _` | '_ \\\n"
                     + "| |  | | (_| | | (_| | |___| | | | (_| | | | |\n"
                     + "|_|  |_|\\__,_|_|\\__,_|\\____|_| |_|\\__,_|_| |_|\n";
+        String name = "MaidChan";
 
-        System.out.println("Hello from\n" + logo);
+        printHorizontalLine();
+        System.out.println("Hello! I'm " + name);
+        System.out.println("What can I do for you?");
+        printHorizontalLine();
+        System.out.println("Bye. Hope to see you again soon!");
+        printHorizontalLine();
+    }
+
+    private static void printHorizontalLine() {
+        System.out.println("____________________________________________________________");
     }
 }
