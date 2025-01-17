@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import task.*;
 
 public class MaidChan {
     private static String name = "MaidChan";
@@ -75,9 +76,31 @@ public class MaidChan {
                 continue;
             }
 
-            tasks.add(new Task(input));
+            Task toAddTask = null;
 
-            sendMessage("Added a task: " + input);
+            if(input.startsWith("todo ")) {
+                String description = input.substring("todo ".length());
+                toAddTask = new ToDo(description);
+            }
+
+            if(input.startsWith("deadline ")) {
+                String description = input.substring("deadline ".length());
+                toAddTask = new Deadline(description);
+            }
+
+            if(input.startsWith("event ")) {
+                String description = input.substring("event ".length());
+                toAddTask = new Event(description);
+            }
+
+            if(toAddTask != null) {
+                tasks.add(toAddTask);
+                sendMessage("Got it. I've added this task:\n\t" + toAddTask.toString());
+                sendMessage("Now you have " + tasks.size() + " tasks in the list.");
+                continue;
+            }
+
+            sendMessage("I don't understand you (yet).");
         }
 
         sendMessage("Bye. Hope to see you again soon!");

@@ -1,9 +1,10 @@
+package task;
 public class Task {
     protected String description;
     protected boolean isDone;
 
     public Task(String description) {
-        this.description = description;
+        this.description = description.trim();
         this.isDone = false;
     }
 
