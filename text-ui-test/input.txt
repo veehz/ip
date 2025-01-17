@@ -15,12 +15,15 @@ deadline return book /by Sunday
 event project meeting /from Mon 2pm /to 4pm
 list
 to test duplicate below
+mark 004
 mark 4
 list
 now test invalid inputs
+mark ?
 todo test /from ok
 deadline return /okay ofsdjfs
 todo
 event project meeting /to 4pm /from 2pm should not work
 event /from F /to T description empty
 event d /from F no to
+mark NOT_AN_INT

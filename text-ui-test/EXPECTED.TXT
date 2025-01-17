@@ -133,6 +133,12 @@ Nice! I've marked this task as done:
 [You]
 
 [MaidChan]
+Nice! I've marked this task as done:
+	[T][X] join sports club
+
+[You]
+
+[MaidChan]
 Here are the tasks in your list:
 	1. [T][X] read book
 	2. [D][ ] return book (by: June 6th)
@@ -145,6 +151,11 @@ Here are the tasks in your list:
 
 [MaidChan]
 I don't understand you (yet).
+
+[You]
+
+[MaidChan]
+Error: Please specify a valid task number to mark.
 
 [You]
 
@@ -177,6 +188,11 @@ Error: The description of a task cannot be empty.
 
 [MaidChan]
 Error: Event description must contain exactly one /to after /from
+
+[You]
+
+[MaidChan]
+Error: Please specify a valid task number to mark.
 
 [You]
 [MaidChan]

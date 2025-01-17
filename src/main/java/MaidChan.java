@@ -80,7 +80,12 @@ public class MaidChan {
                 throw new TaskException("Please specify a task number to " + command + ".");
             }
 
-            int taskNumber = Integer.parseInt(parts[1]);
+            int taskNumber;
+            try {
+                taskNumber = Integer.parseInt(parts[1]);
+            } catch (NumberFormatException e) {
+                throw new TaskException("Please specify a valid task number to " + command + ".");
+            }
             if (taskNumber < 1 || taskNumber > tasks.size()) {
                 throw new TaskException("Task number out of range.");
             }
