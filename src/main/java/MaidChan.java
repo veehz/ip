@@ -39,6 +39,42 @@ public class MaidChan {
                 continue;
             }
 
+            if(input.startsWith("mark ")) {
+                String[] parts = input.split(" ");
+                if(parts.length != 2) {
+                    sendMessage("Please specify a task number to mark.");
+                    continue;
+                }
+
+                int taskNumber = Integer.parseInt(parts[1]);
+                if(taskNumber < 1 || taskNumber > tasks.size()) {
+                    sendMessage("Task number out of range.");
+                    continue;
+                }
+
+                tasks.get(taskNumber - 1).mark();
+                sendMessage("Nice! I've marked this task as done:\n\t" + tasks.get(taskNumber - 1).toString());
+                continue;
+            }
+
+            if(input.startsWith("unmark ")) {
+                String[] parts = input.split(" ");
+                if(parts.length != 2) {
+                    sendMessage("Please specify a task number to unmark.");
+                    continue;
+                }
+
+                int taskNumber = Integer.parseInt(parts[1]);
+                if(taskNumber < 1 || taskNumber > tasks.size()) {
+                    sendMessage("Task number out of range.");
+                    continue;
+                }
+
+                tasks.get(taskNumber - 1).unmark();
+                sendMessage("Nice! I've unmarked this task:\n\t" + tasks.get(taskNumber - 1).toString());
+                continue;
+            }
+
             tasks.add(new Task(input));
 
             sendMessage("Added a task: " + input);
