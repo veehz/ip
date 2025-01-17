@@ -21,3 +21,5 @@ text-ui-test/EXPECTED-UNIX.TXT
 
 # Nix Package Manager files
 shell.nix
+# Checkstyle file
+checks.xml

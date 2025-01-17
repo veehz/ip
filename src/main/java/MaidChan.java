@@ -1,13 +1,26 @@
-import java.util.ArrayList;
-import java.util.List;
-import task.*;
-import java.util.Scanner;
 import exceptions.CommandNotFoundException;
 import exceptions.TaskException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDo;
 
+/**
+ * The main class of MaidChan.
+ * MaidChan is a simple chatbot that helps you manage your tasks.
+ */
 public class MaidChan {
+    /** The name of MaidChan. */
     private static String name = "MaidChan";
 
+    /**
+     * The entry point of MaidChan.
+     *
+     * @param args the command-line arguments
+     */
     public static void main(String[] args) {
         String logo = " __  __       _     _  ____ _\n"
                 + "|  \\/  | __ _(_) __| |/ ___| |__   __ _ _ __\n"

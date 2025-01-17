@@ -2,9 +2,19 @@ package task;
 
 import exceptions.TaskException;
 
+/**
+ * Represents a task with a deadline.
+ */
 public class Deadline extends Task {
     private String by;
 
+    /**
+     * Constructs a new Deadline with the description.
+     *
+     * @param description the description of the deadline
+     * @throws TaskException if the description is empty or invalid
+     *     (does not contain exactly one /by)
+     */
     public Deadline(String description) throws TaskException {
         super(description);
 

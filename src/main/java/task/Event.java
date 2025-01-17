@@ -2,10 +2,20 @@ package task;
 
 import exceptions.TaskException;
 
+/**
+ * Represents a task that starts and ends at specific times.
+ */
 public class Event extends Task {
     private String from;
     private String to;
 
+    /**
+     * Constructs a new Event with the description.
+     *
+     * @param description the description of the event
+     * @throws TaskException if the description is empty or invalid
+     *     (does not contain exactly one /from or /to)
+     */
     public Event(String description) throws TaskException {
         super(description);
 

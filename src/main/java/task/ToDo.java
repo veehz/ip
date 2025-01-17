@@ -2,7 +2,16 @@ package task;
 
 import exceptions.TaskException;
 
+/**
+ * Represents a task that can be done. This is the most basic task.
+ */
 public class ToDo extends Task {
+    /**
+     * Constructs a new ToDo with the description.
+     *
+     * @param description the description of the task
+     * @throws TaskException if the description is empty
+     */
     public ToDo(String description) throws TaskException {
         super(description);
     }
