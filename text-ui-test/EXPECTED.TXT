@@ -142,6 +142,43 @@ Here are the tasks in your list:
 	6. [E][ ] project meeting (from: Mon 2pm, to: 4pm)
 
 [You]
+
+[MaidChan]
+I don't understand you (yet).
+
+[You]
+
+[MaidChan]
+Got it. I've added this task:
+	[T][ ] test /from ok
+Now you have 7 tasks in the list.
+
+[You]
+
+[MaidChan]
+Error: Deadline description must contain exactly one /by
+
+[You]
+
+[MaidChan]
+Error: The description of a task cannot be empty.
+
+[You]
+
+[MaidChan]
+Error: Event description must contain exactly one /to after /from
+
+[You]
+
+[MaidChan]
+Error: The description of a task cannot be empty.
+
+[You]
+
+[MaidChan]
+Error: Event description must contain exactly one /to after /from
+
+[You]
 [MaidChan]
 Bye. Hope to see you again soon!
 
