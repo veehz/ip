@@ -1,17 +1,22 @@
 package task;
 
+import exceptions.TaskException;
+
 public class Deadline extends Task {
     private String by;
 
-    public Deadline(String description) {
+    public Deadline(String description) throws TaskException {
         super(description);
 
         // Split into [description] /by [by]
 
         String[] parts = description.split("/by");
-        this.description = parts[0].trim();
 
-        // Need to handle case where /by is not present, or when multiple /by
+        setDescription(parts[0].trim());
+
+        if (parts.length != 2) {
+            throw new TaskException("Deadline description must contain exactly one /by");
+        }
 
         this.by = parts[1].trim();
     }

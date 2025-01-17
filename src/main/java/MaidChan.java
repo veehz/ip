@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 import task.*;
 import java.util.Scanner;
+import exceptions.CommandNotFoundException;
+import exceptions.TaskException;
 
 public class MaidChan {
     private static String name = "MaidChan";
@@ -33,14 +35,21 @@ public class MaidChan {
                 break;
             }
 
-            handleInput(tasks, input);
+            try {
+                handleInput(tasks, input);
+            } catch (CommandNotFoundException e) {
+                sendMessage(e.getMessage());
+            } catch (TaskException e) {
+                sendMessage("Error: " + e.getMessage());
+            }
         }
 
         sendMessage("Bye. Hope to see you again soon!");
         scanner.close();
     }
 
-    private static void handleInput(ArrayList<Task> tasks, String input) {
+    private static void handleInput(ArrayList<Task> tasks, String input)
+            throws CommandNotFoundException, TaskException {
         if (input.equals("list")) {
             ArrayList<String> messages = new ArrayList<>();
             messages.add("Here are the tasks in your list:");
@@ -51,17 +60,15 @@ public class MaidChan {
             return;
         }
 
-        if (input.startsWith("mark ")) {
+        if (input.startsWith("mark")) {
             String[] parts = input.split(" ");
             if (parts.length != 2) {
-                sendMessage("Please specify a task number to mark.");
-                return;
+                throw new TaskException("Please specify a task number to mark.");
             }
 
             int taskNumber = Integer.parseInt(parts[1]);
             if (taskNumber < 1 || taskNumber > tasks.size()) {
-                sendMessage("Task number out of range.");
-                return;
+                throw new TaskException("Task number out of range.");
             }
 
             tasks.get(taskNumber - 1).mark();
@@ -70,17 +77,15 @@ public class MaidChan {
             return;
         }
 
-        if (input.startsWith("unmark ")) {
+        if (input.startsWith("unmark")) {
             String[] parts = input.split(" ");
             if (parts.length != 2) {
-                sendMessage("Please specify a task number to unmark.");
-                return;
+                throw new TaskException("Please specify a task number to unmark.");
             }
 
             int taskNumber = Integer.parseInt(parts[1]);
             if (taskNumber < 1 || taskNumber > tasks.size()) {
-                sendMessage("Task number out of range.");
-                return;
+                throw new TaskException("Task number out of range.");
             }
 
             tasks.get(taskNumber - 1).unmark();
@@ -91,18 +96,18 @@ public class MaidChan {
 
         Task toAddTask = null;
 
-        if (input.startsWith("todo ")) {
-            String description = input.substring("todo ".length());
+        if (input.startsWith("todo")) {
+            String description = input.substring("todo".length());
             toAddTask = new ToDo(description);
         }
 
-        if (input.startsWith("deadline ")) {
-            String description = input.substring("deadline ".length());
+        if (input.startsWith("deadline")) {
+            String description = input.substring("deadline".length());
             toAddTask = new Deadline(description);
         }
 
-        if (input.startsWith("event ")) {
-            String description = input.substring("event ".length());
+        if (input.startsWith("event")) {
+            String description = input.substring("event".length());
             toAddTask = new Event(description);
         }
 
@@ -113,7 +118,8 @@ public class MaidChan {
             return;
         }
 
-        sendMessage("I don't understand you (yet).");
+        // sendMessage("I don't understand you (yet).");
+        throw new CommandNotFoundException("I don't understand you (yet).");
     }
 
     private static void sendMessage(String message) {
