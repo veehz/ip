@@ -13,6 +13,22 @@ public class MaidChan {
             "Hello! I'm " + MaidChan.name + ".",
             "What can I do for you?"
         ));
+
+        while(true) {
+            System.out.println("[You]");
+            String input = System.console().readLine();
+            if(input == null || input.isEmpty()) {
+                continue;
+            }
+
+            System.out.println();
+            if(input.equals("bye")) {
+                break;
+            }
+
+            sendMessage(input);
+        }
+
         sendMessage("Bye. Hope to see you again soon!");
     }
 
