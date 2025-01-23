@@ -1,5 +1,6 @@
 package task;
 
+import exceptions.MaidChanUnexpectedException;
 import exceptions.TaskException;
 
 /**
@@ -9,6 +10,7 @@ import exceptions.TaskException;
 public class Task {
     protected String description;
     protected boolean isDone;
+    public static final String COMMAND_NAME = "task";
 
     /**
      * Constructs a new Task with the description.
@@ -50,5 +52,13 @@ public class Task {
     @Override
     public String toString() {
         return "[" + (this.isDone ? "X" : " ") + "] " + this.description;
+    }
+
+    public String toRepr() {
+        try {
+            return (this.isDone ? "1 " : "0 ") + this.getClass().getDeclaredField("COMMAND_NAME").get(null).toString() + " " + this.description;
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new MaidChanUnexpectedException("Failed to get COMMAND_NAME: " + e.getMessage());
+        }
     }
 }

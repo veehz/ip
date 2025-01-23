@@ -1,6 +1,10 @@
 # Class files
 *.class
 
+# Data files
+/data/
+/text-ui-test/data/
+
 # IDEA files
 /.idea/
 /out/

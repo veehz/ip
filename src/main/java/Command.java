@@ -13,11 +13,11 @@ public enum Command {
                 return UNMARK;
             case "delete":
                 return DELETE;
-            case "todo":
+            case task.ToDo.COMMAND_NAME:
                 return TODO;
-            case "deadline":
+            case task.Deadline.COMMAND_NAME:
                 return DEADLINE;
-            case "event":
+            case task.Event.COMMAND_NAME:
                 return EVENT;
             default:
                 throw new CommandNotFoundException(command);

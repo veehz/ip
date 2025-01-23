@@ -8,6 +8,7 @@ import exceptions.TaskException;
 public class Event extends Task {
     private String from;
     private String to;
+    public static final String COMMAND_NAME = "event";
 
     /**
      * Constructs a new Event with the description.
@@ -42,5 +43,10 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + this.from + ", to: " + this.to + ")";
+    }
+
+    @Override
+    public String toRepr() {
+        return super.toRepr() + " /from " + this.from + " /to " + this.to;
     }
 }

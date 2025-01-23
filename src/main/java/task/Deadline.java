@@ -7,6 +7,7 @@ import exceptions.TaskException;
  */
 public class Deadline extends Task {
     private String by;
+    public static final String COMMAND_NAME = "deadline";
 
     /**
      * Constructs a new Deadline with the description.
@@ -34,5 +35,10 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.by + ")";
+    }
+
+    @Override
+    public String toRepr() {
+        return super.toRepr() + " /by " + this.by;
     }
 }
