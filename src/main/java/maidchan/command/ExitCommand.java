@@ -4,6 +4,9 @@ import maidchan.storage.Storage;
 import maidchan.task.TaskList;
 import maidchan.ui.Ui;
 
+/**
+ * Represents a command to exit.
+ */
 public class ExitCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

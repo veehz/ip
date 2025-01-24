@@ -5,6 +5,9 @@ import maidchan.storage.Storage;
 import maidchan.task.TaskList;
 import maidchan.ui.Ui;
 
+/**
+ * Represents a command to list tasks.
+ */
 public class ListCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

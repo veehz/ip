@@ -13,13 +13,27 @@ import maidchan.task.Event;
 import maidchan.task.Task;
 import maidchan.task.ToDo;
 
+/**
+ * Handles the loading and saving of tasks to a file.
+ */
 public class Storage {
     private File file;
 
+    /**
+     * Constructs a new Storage with the specified file path.
+     *
+     * @param filePath the path to the file
+     */
     public Storage(String filePath) {
         file = new File(filePath);
     }
 
+    /**
+     * Loads the todo list from the file.
+     * If the file does not exist, an empty list is returned.
+     *
+     * @return the list of tasks
+     */
     public ArrayList<Task> loadTodoList() {
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -64,6 +78,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the todo list to the file.
+     * If the file does not exist, it will be created.
+     *
+     * @param tasks the list of tasks to save
+     */
     public void saveTodoList(List<Task> tasks) {
         file.getParentFile().mkdirs(); // Create directories if they do not exist
 
