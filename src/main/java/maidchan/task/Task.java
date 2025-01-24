@@ -27,6 +27,15 @@ public class Task {
     }
 
     /**
+     * Returns the description of the task.
+     *
+     * @return the description of the task
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
      * Sets the description of the task.
      *
      * @param description the new description of the task
@@ -45,11 +54,9 @@ public class Task {
         }
     }
 
-    public String getDescription() {
-        return this.description;
-    }
-
-    /** Mark this task as done. */
+    /**
+     * Mark this task as done.
+     */
     public void mark() {
         this.isDone = true;
     }

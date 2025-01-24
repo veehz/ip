@@ -12,8 +12,8 @@ public abstract class Command {
     /**
      * Executes the command.
      *
-     * @param tasks the list of tasks
-     * @param ui the user interface
+     * @param tasks   the list of tasks
+     * @param ui      the user interface
      * @param storage the storage
      * @throws TaskException if an error occurs during execution
      */

@@ -24,7 +24,7 @@ public class Parser {
      * @param command The command string to parse.
      * @return The Command object corresponding to the parsed command.
      * @throws CommandNotFoundException If the command is not recognized.
-     * @throws TaskException If there is an error related to task operations.
+     * @throws TaskException            If there is an error related to task operations.
      */
     public Command parseCommand(String command) throws CommandNotFoundException, TaskException {
         String[] parts = command.split(" ", 2);
@@ -33,26 +33,26 @@ public class Parser {
 
         try {
             switch (commandType) {
-                case "list":
-                    return new ListCommand();
-                case "mark":
-                    return new MarkCommand(Integer.parseInt(description) - 1);
-                case "unmark":
-                    return new UnmarkCommand(Integer.parseInt(description) - 1);
-                case "delete":
-                    return new DeleteCommand(Integer.parseInt(description) - 1);
-                case "find":
-                    return new FindCommand(description);
-                case ToDo.COMMAND_NAME:
-                    return new AddCommand(new ToDo(description));
-                case Deadline.COMMAND_NAME:
-                    return new AddCommand(new Deadline(description));
-                case Event.COMMAND_NAME:
-                    return new AddCommand(new Event(description));
-                case "bye":
-                    return new ExitCommand();
-                default:
-                    throw new CommandNotFoundException(commandType);
+            case "list":
+                return new ListCommand();
+            case "mark":
+                return new MarkCommand(Integer.parseInt(description) - 1);
+            case "unmark":
+                return new UnmarkCommand(Integer.parseInt(description) - 1);
+            case "delete":
+                return new DeleteCommand(Integer.parseInt(description) - 1);
+            case "find":
+                return new FindCommand(description);
+            case ToDo.COMMAND_NAME:
+                return new AddCommand(new ToDo(description));
+            case Deadline.COMMAND_NAME:
+                return new AddCommand(new Deadline(description));
+            case Event.COMMAND_NAME:
+                return new AddCommand(new Event(description));
+            case "bye":
+                return new ExitCommand();
+            default:
+                throw new CommandNotFoundException(commandType);
             }
         } catch (NumberFormatException e) {
             switch (commandType) {

@@ -29,10 +29,6 @@
     <property name="fileNamePattern" value="module\-info\.java$" />
   </module>
 
-  <!-- This ensures every file has a non-empty package declaration.        -->
-  <!-- (i.e., no classes in the default package).                           -->
-  <module name="PackageDeclaration" />
-
   <module name="SuppressWarningsFilter" />
 
   <!-- https://checkstyle.org/filters/suppressionfilter.html -->
@@ -64,11 +60,11 @@
   </module>
 
   <module name="TreeWalker">
-    <module name="VisibilityModifier">
-      <!-- scope="public" => check all public fields for possible demotion. -->
-      <!-- The check won't fail if they're 'static final' though. -->
-      <property name="scope" value="public" />
-    </module>
+    <!-- This ensures every file has a non-empty package declaration.        -->
+    <!-- (i.e., no classes in the default package).                           -->
+    <module name="PackageDeclaration" />
+
+    <module name="VisibilityModifier" />
 
     <module name="ConstantName">
       <property name="format" value="^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$" />
@@ -96,7 +92,7 @@
       <property name="tokens"
         value="LITERAL_DO, LITERAL_ELSE, LITERAL_FOR, LITERAL_IF, LITERAL_WHILE" />
     </module>
-    <!-- <module name="LeftCurly">
+    <module name="LeftCurly">
       <property name="id" value="LeftCurlyEol" />
       <property name="tokens"
         value="ANNOTATION_DEF, CLASS_DEF, CTOR_DEF, ENUM_CONSTANT_DEF, ENUM_DEF,
@@ -107,14 +103,9 @@
     </module>
     <module name="LeftCurly">
       <property name="id" value="LeftCurlyNl" />
-      <property name="option" value="nl" />
+      <property name="option" value="eol" />
       <property name="tokens"
         value="LITERAL_CASE, LITERAL_DEFAULT" />
-    </module> -->
-    <module name="LeftCurly">
-      <!-- "eol" => the '{' is at the end of the previous line (“K&R”). -->
-      <property name="option" value="eol" />
-      <!-- If you have enum constants with their own classes, this can avoid false positives. -->
       <property name="ignoreEnums" value="true" />
     </module>
     <module name="SuppressionXpathSingleFilter">
@@ -122,7 +113,7 @@
       <property name="id" value="LeftCurlyNl" />
       <property name="query" value="//SWITCH_RULE/SLIST" />
     </module>
-    <!-- <module name="RightCurly">
+    <module name="RightCurly">
       <property name="id" value="RightCurlySame" />
       <property name="tokens"
         value="LITERAL_TRY, LITERAL_CATCH, LITERAL_IF, LITERAL_ELSE,
@@ -135,11 +126,6 @@
         value="CLASS_DEF, METHOD_DEF, CTOR_DEF, LITERAL_FOR, LITERAL_WHILE, STATIC_INIT,
                     INSTANCE_INIT, ANNOTATION_DEF, ENUM_DEF, INTERFACE_DEF, RECORD_DEF,
                     COMPACT_CTOR_DEF, LITERAL_SWITCH, LITERAL_CASE, LITERAL_FINALLY" />
-    </module> -->
-    <module name="RightCurly">
-      <property name="option" value="alone" />
-      <!-- This means an empty block { } can remain on one line if you like. -->
-      <property name="ignoreEmptyDefinition" value="true" />
     </module>
     <module name="SuppressionXpathSingleFilter">
       <!-- suppression is required till https://github.com/checkstyle/checkstyle/issues/7541 -->
