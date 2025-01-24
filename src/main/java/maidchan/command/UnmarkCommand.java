@@ -10,7 +10,7 @@ import maidchan.ui.Ui;
  * Represents a command to unmark a task as done.
  */
 public class UnmarkCommand extends Command {
-    private int taskIndex;
+    private final int taskIndex;
 
     /**
      * Constructs a new UnmarkCommand with the specified task index.
@@ -25,7 +25,7 @@ public class UnmarkCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws TaskException {
         Task task = tasks.getTasks().get(taskIndex);
         task.unmark();
-        ui.sendMessage("Nice! I've unmarked this task:\n\t" + task.toString());
+        ui.sendMessage("Nice! I've unmarked this task:\n\t" + task);
         storage.saveTodoList(tasks.getTasks());
     }
 }

@@ -10,7 +10,7 @@ import maidchan.ui.Ui;
  * Represents a command to delete a task.
  */
 public class DeleteCommand extends Command {
-    private int taskIndex;
+    private final int taskIndex;
 
     /**
      * Constructs a new DeleteCommand with the specified task index.

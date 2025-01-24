@@ -7,9 +7,9 @@ import maidchan.exceptions.TaskException;
  * Represents a task that can be done. This is the superclass of all tasks.
  */
 public class Task {
+    public static final String COMMAND_NAME = "task";
     protected String description;
     protected boolean isDone;
-    public static final String COMMAND_NAME = "task";
 
     /**
      * Constructs a new Task with the description.

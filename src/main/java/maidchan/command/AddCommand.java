@@ -10,7 +10,7 @@ import maidchan.ui.Ui;
  * Represents a command to add a task.
  */
 public class AddCommand extends Command {
-    private Task task;
+    private final Task task;
 
     /**
      * Constructs a new AddCommand with the specified task.
