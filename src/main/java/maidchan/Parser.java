@@ -13,7 +13,18 @@ import maidchan.task.Deadline;
 import maidchan.task.Event;
 import maidchan.task.ToDo;
 
+/**
+ * Parses user input into commands.
+ */
 public class Parser {
+    /**
+     * Parses the given command string and returns the corresponding Command object.
+     *
+     * @param command The command string to parse.
+     * @return The Command object corresponding to the parsed command.
+     * @throws CommandNotFoundException If the command is not recognized.
+     * @throws TaskException If there is an error related to task operations.
+     */
     public Command parseCommand(String command) throws CommandNotFoundException, TaskException {
         String[] parts = command.split(" ", 2);
         String commandType = parts[0];

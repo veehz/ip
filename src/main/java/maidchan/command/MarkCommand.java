@@ -6,9 +6,17 @@ import maidchan.task.Task;
 import maidchan.task.TaskList;
 import maidchan.ui.Ui;
 
+/**
+ * Represents a command to mark a task as done.
+ */
 public class MarkCommand extends Command {
     private int taskIndex;
 
+    /**
+     * Constructs a new MarkCommand with the specified task index.
+     *
+     * @param taskIndex the index of the task to mark
+     */
     public MarkCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }

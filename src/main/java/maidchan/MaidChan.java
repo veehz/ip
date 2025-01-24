@@ -10,12 +10,20 @@ import maidchan.ui.Ui;
 import java.io.File;
 import java.util.Scanner;
 
+/**
+ * Represents the MaidChan bot.
+ */
 public class MaidChan {
     private static TaskList taskList;
     private static Ui ui;
     private static Storage storage;
     private static Parser parser;
 
+    /**
+     * Starts the MaidChan bot.
+     *
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         ui = new Ui();

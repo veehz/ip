@@ -6,9 +6,17 @@ import maidchan.task.Task;
 import maidchan.task.TaskList;
 import maidchan.ui.Ui;
 
+/**
+ * Represents a command to unmark a task as done.
+ */
 public class UnmarkCommand extends Command {
     private int taskIndex;
 
+    /**
+     * Constructs a new UnmarkCommand with the specified task index.
+     *
+     * @param taskIndex the index of the task to unmark
+     */
     public UnmarkCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }

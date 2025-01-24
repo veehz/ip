@@ -45,12 +45,16 @@ public class Task {
         }
     }
 
-    /** Mark this task as done. */
+    /**
+     * Mark this task as done.
+     */
     public void mark() {
         this.isDone = true;
     }
 
-    /** Unmark this task as done. */
+    /**
+     * Unmark this task as done.
+     */
     public void unmark() {
         this.isDone = false;
     }
@@ -60,6 +64,11 @@ public class Task {
         return "[" + (this.isDone ? "X" : " ") + "] " + this.description;
     }
 
+    /**
+     * Returns the string representation of the task for storage.
+     *
+     * @return the string representation of the task for storage
+     */
     public String toRepr() {
         try {
             return (this.isDone ? "1 " : "0 ") + getCommandName() + " " + this.description;

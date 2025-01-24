@@ -6,9 +6,17 @@ import maidchan.task.Task;
 import maidchan.task.TaskList;
 import maidchan.ui.Ui;
 
+/**
+ * Represents a command to add a task.
+ */
 public class AddCommand extends Command {
     private Task task;
 
+    /**
+     * Constructs a new AddCommand with the specified task.
+     *
+     * @param task the task to add
+     */
     public AddCommand(Task task) {
         this.task = task;
     }
