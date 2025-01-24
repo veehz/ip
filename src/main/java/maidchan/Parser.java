@@ -4,6 +4,7 @@ import maidchan.command.AddCommand;
 import maidchan.command.Command;
 import maidchan.command.DeleteCommand;
 import maidchan.command.ExitCommand;
+import maidchan.command.FindCommand;
 import maidchan.command.ListCommand;
 import maidchan.command.MarkCommand;
 import maidchan.command.UnmarkCommand;
@@ -29,6 +30,8 @@ public class Parser {
                     return new UnmarkCommand(Integer.parseInt(description) - 1);
                 case "delete":
                     return new DeleteCommand(Integer.parseInt(description) - 1);
+                case "find":
+                    return new FindCommand(description);
                 case ToDo.COMMAND_NAME:
                     return new AddCommand(new ToDo(description));
                 case Deadline.COMMAND_NAME:
