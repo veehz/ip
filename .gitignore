@@ -5,6 +5,9 @@
 /data/
 /text-ui-test/data/
 
+# VSCode files
+.vscode/
+
 # IDEA files
 /.idea/
 /out/
