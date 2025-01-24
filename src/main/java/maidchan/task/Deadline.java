@@ -6,15 +6,15 @@ import maidchan.exceptions.TaskException;
  * Represents a task with a deadline.
  */
 public class Deadline extends Task {
-    private TaskDateTime by;
     public static final String COMMAND_NAME = "deadline";
+    private final TaskDateTime by;
 
     /**
      * Constructs a new Deadline with the description.
      *
      * @param description the description of the deadline
      * @throws TaskException if the description is empty or invalid (does not contain exactly one
-     *         /by)
+     *                       /by)
      */
     public Deadline(String description) throws TaskException {
         super(description);

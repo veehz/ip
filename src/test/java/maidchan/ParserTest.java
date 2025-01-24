@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 import maidchan.command.Command;
 import maidchan.exceptions.CommandNotFoundException;
 import maidchan.exceptions.TaskException;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 

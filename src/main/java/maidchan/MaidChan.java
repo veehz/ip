@@ -1,5 +1,7 @@
 package maidchan;
 
+import java.io.File;
+import java.util.Scanner;
 import maidchan.command.Command;
 import maidchan.exceptions.CommandNotFoundException;
 import maidchan.exceptions.MaidChanUnexpectedException;
@@ -7,8 +9,6 @@ import maidchan.exceptions.TaskException;
 import maidchan.storage.Storage;
 import maidchan.task.TaskList;
 import maidchan.ui.Ui;
-import java.io.File;
-import java.util.Scanner;
 
 public class MaidChan {
     private static TaskList taskList;
@@ -21,7 +21,8 @@ public class MaidChan {
         ui = new Ui();
         ui.showWelcomeMessage();
 
-        storage = new Storage(System.getProperty("user.dir") + File.separator + "data" + File.separator + "tasks.txt");
+        storage = new Storage(
+                System.getProperty("user.dir") + File.separator + "data" + File.separator + "tasks.txt");
         taskList = new TaskList();
         taskList.getTasks().addAll(storage.loadTodoList());
         parser = new Parser();

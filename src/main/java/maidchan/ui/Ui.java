@@ -3,8 +3,7 @@ package maidchan.ui;
 import java.util.List;
 
 public class Ui {
-    private static final String logo = "" //
-            + " __  __       _     _  ____ _\n" //
+    private static final String logo = " __  __       _     _  ____ _\n"
             + "|  \\/  | __ _(_) __| |/ ___| |__   __ _ _ __\n"
             + "| |\\/| |/ _` | |/ _` | |   | '_ \\ / _` | '_ \\\n"
             + "| |  | | (_| | | (_| | |___| | | | (_| | | | |\n"

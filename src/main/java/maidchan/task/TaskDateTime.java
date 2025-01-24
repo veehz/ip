@@ -9,9 +9,9 @@ import java.time.format.DateTimeParseException;
  * Parses a string into a LocalDateTime object.
  */
 public class TaskDateTime {
+    public static final String ACCEPTED_FORMATS = "yyyy-MM-dd HH:mm or yyyy-MM-dd";
     private boolean hasTime;
     private LocalDateTime dateTime;
-    public static final String ACCEPTED_FORMATS = "yyyy-MM-dd HH:mm or yyyy-MM-dd";
 
     /**
      * Parses a string into a LocalDateTime object.
