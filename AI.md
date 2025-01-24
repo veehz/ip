@@ -26,3 +26,5 @@
         - Types are wrong
         - Missing features when refactoring (e.g. missing methods, error handling)
     - Saved *a lot* of time, but still needs quite a lot of manual adjustments/reprompts.
+    - Can be used to generate tests very quickly
+        - Works on parameterized tests as well to cover more cases.
