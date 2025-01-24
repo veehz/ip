@@ -3,16 +3,16 @@ hello do nothing
 todo read book
 mark 1
 list
-deadline return book /by June 6th
-event project meeting /from Aug 6th 2pm /to 4pm
+deadline return book /by 2024-06-06
+event project meeting /from 2024-08-06 14:00 /to 2024-08-06 18:00
 todo join sports club
 mark 3
 mark 4
 list
 unmark 3
 list
-deadline return book /by Sunday
-event project meeting /from Mon 2pm /to 4pm
+deadline return book /by 2024-08-06 18:00
+event project /from 2024-08-05 /to 2024-08-20 14:00
 list
 to test duplicate below
 mark 004
@@ -20,10 +20,11 @@ mark 4
 list
 now test invalid inputs
 mark ?
-todo test /from ok
+todo test /from 2024-08-20 14:00
 deadline return /okay ofsdjfs
 todo
 event project meeting /to 4pm /from 2pm should not work
-event /from F /to T description empty
-event d /from F no to
+event project meeting should not work either /to 2024-08-05 14:00 /from 2024-08-05 16:00
+event description empty /from 2024-12-05 /to 2025-08-05
+event d no to /from 2025-08-05
 mark NOT_AN_INT
