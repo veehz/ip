@@ -18,3 +18,11 @@
     - The list command was completely removed during the refactoring.
     - The use of exceptions is also not consistent. Therefore, I have created a new UnexpectedException type.
     - Still heavily unreliable and needs a lot of manual work (~15 minutes after first prompt to refactor).
+5. Just found out about Copilot Edits.
+    - Given a prompt (refactor so that it splits into Ui, Storage, Parser, and TaskList classes), Copilot Edits will automatically create the files for you.
+    - Some problems encountered include:
+        - File stored in the wrong directory
+        - Imports are wrong (did not import the right packages)
+        - Types are wrong
+        - Missing features when refactoring (e.g. missing methods, error handling)
+    - Saved *a lot* of time, but still needs quite a lot of manual adjustments/reprompts.

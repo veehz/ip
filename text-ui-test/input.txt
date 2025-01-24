@@ -28,3 +28,4 @@ event project meeting should not work either /to 2024-08-05 14:00 /from 2024-08-
 event description empty /from 2024-12-05 /to 2025-08-05
 event d no to /from 2025-08-05
 mark NOT_AN_INT
+bye

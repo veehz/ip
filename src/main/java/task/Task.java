@@ -4,8 +4,7 @@ import exceptions.MaidChanUnexpectedException;
 import exceptions.TaskException;
 
 /**
- * Represents a task that can be done.
- * This is the superclass of all tasks.
+ * Represents a task that can be done. This is the superclass of all tasks.
  */
 public class Task {
     protected String description;
@@ -19,11 +18,12 @@ public class Task {
      * @throws TaskException if the description is empty
      */
     public Task(String description) throws TaskException {
-        this.description = description.trim();
-        if (this.description.isEmpty()) {
-            throw new TaskException("The description of a task cannot be empty.");
-        }
+        setDescription(description);
         this.isDone = false;
+    }
+
+    private String getCommandName() throws NoSuchFieldException, IllegalAccessException {
+        return this.getClass().getDeclaredField("COMMAND_NAME").get(null).toString();
     }
 
     /**
@@ -33,10 +33,16 @@ public class Task {
      * @throws TaskException if the description is empty
      */
     protected void setDescription(String description) throws TaskException {
-        if (description.trim().isEmpty()) {
-            throw new TaskException("The description of a task cannot be empty.");
-        }
         this.description = description.trim();
+        if (this.description.isEmpty()) {
+            try {
+                throw new TaskException(
+                        "The description of a " + getCommandName() + " cannot be empty.");
+            } catch (NoSuchFieldException | IllegalAccessException e) {
+                throw new MaidChanUnexpectedException(
+                        "Failed to get COMMAND_NAME: " + e.getMessage());
+            }
+        }
     }
 
     /** Mark this task as done. */
@@ -56,7 +62,7 @@ public class Task {
 
     public String toRepr() {
         try {
-            return (this.isDone ? "1 " : "0 ") + this.getClass().getDeclaredField("COMMAND_NAME").get(null).toString() + " " + this.description;
+            return (this.isDone ? "1 " : "0 ") + getCommandName() + " " + this.description;
         } catch (NoSuchFieldException | IllegalAccessException e) {
             throw new MaidChanUnexpectedException("Failed to get COMMAND_NAME: " + e.getMessage());
         }
