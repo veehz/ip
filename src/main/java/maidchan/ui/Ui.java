@@ -1,4 +1,4 @@
-package ui;
+package maidchan.ui;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class Ui {
     public void showWelcomeMessage() {
         System.out.println(logo);
         startMessage();
-        sendMessage(List.of("Hello! I'm " + name + ".", "What can I do for you?"));
+        sendMessage("Hello! I'm " + name + ".\nWhat can I do for you?");
     }
 
     public void startMessage() {

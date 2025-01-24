@@ -1,9 +1,9 @@
-package command;
+package maidchan.command;
 
-import exceptions.TaskException;
-import storage.Storage;
-import task.TaskList;
-import ui.Ui;
+import maidchan.exceptions.TaskException;
+import maidchan.storage.Storage;
+import maidchan.task.TaskList;
+import maidchan.ui.Ui;
 
 public abstract class Command {
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws TaskException;

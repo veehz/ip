@@ -1,4 +1,4 @@
-package exceptions;
+package maidchan.exceptions;
 
 /**
  * Exception thrown when an unexpected error occurs.

@@ -1,6 +1,6 @@
-package task;
+package maidchan.task;
 
-import exceptions.TaskException;
+import maidchan.exceptions.TaskException;
 
 /**
  * Represents a task that starts and ends at specific times.

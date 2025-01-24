@@ -1,12 +1,14 @@
-import command.Command;
-import exceptions.CommandNotFoundException;
-import exceptions.MaidChanUnexpectedException;
-import exceptions.TaskException;
+package maidchan;
+
+import maidchan.command.Command;
+import maidchan.exceptions.CommandNotFoundException;
+import maidchan.exceptions.MaidChanUnexpectedException;
+import maidchan.exceptions.TaskException;
+import maidchan.storage.Storage;
+import maidchan.task.TaskList;
+import maidchan.ui.Ui;
 import java.io.File;
 import java.util.Scanner;
-import storage.Storage;
-import task.TaskList;
-import ui.Ui;
 
 public class MaidChan {
     private static TaskList taskList;

@@ -1,4 +1,4 @@
-package exceptions;
+package maidchan.exceptions;
 
 /**
  * Exception thrown when a command is not found.

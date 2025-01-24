@@ -1,7 +1,7 @@
-package task;
+package maidchan.task;
 
-import exceptions.MaidChanUnexpectedException;
-import exceptions.TaskException;
+import maidchan.exceptions.MaidChanUnexpectedException;
+import maidchan.exceptions.TaskException;
 
 /**
  * Represents a task that can be done. This is the superclass of all tasks.

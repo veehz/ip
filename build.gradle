@@ -28,7 +28,7 @@ test {
 }
 
 application {
-    mainClass.set("MaidChan")
+    mainClass.set("maidchan.MaidChan")
 }
 
 shadowJar {

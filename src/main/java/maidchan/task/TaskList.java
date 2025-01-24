@@ -1,4 +1,4 @@
-package task;
+package maidchan.task;
 
 import java.util.ArrayList;
 

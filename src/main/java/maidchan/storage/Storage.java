@@ -1,17 +1,17 @@
-package storage;
+package maidchan.storage;
 
-import exceptions.MaidChanUnexpectedException;
-import exceptions.TaskException;
+import maidchan.exceptions.MaidChanUnexpectedException;
+import maidchan.exceptions.TaskException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.ToDo;
+import maidchan.task.Deadline;
+import maidchan.task.Event;
+import maidchan.task.Task;
+import maidchan.task.ToDo;
 
 public class Storage {
     private File file;

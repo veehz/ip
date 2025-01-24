@@ -1,8 +1,8 @@
-package command;
+package maidchan.command;
 
-import storage.Storage;
-import task.TaskList;
-import ui.Ui;
+import maidchan.storage.Storage;
+import maidchan.task.TaskList;
+import maidchan.ui.Ui;
 
 public class ExitCommand extends Command {
     @Override

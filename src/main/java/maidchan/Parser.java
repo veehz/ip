@@ -1,15 +1,17 @@
-import command.AddCommand;
-import command.Command;
-import command.DeleteCommand;
-import command.ExitCommand;
-import command.ListCommand;
-import command.MarkCommand;
-import command.UnmarkCommand;
-import exceptions.CommandNotFoundException;
-import exceptions.TaskException;
-import task.Deadline;
-import task.Event;
-import task.ToDo;
+package maidchan;
+
+import maidchan.command.AddCommand;
+import maidchan.command.Command;
+import maidchan.command.DeleteCommand;
+import maidchan.command.ExitCommand;
+import maidchan.command.ListCommand;
+import maidchan.command.MarkCommand;
+import maidchan.command.UnmarkCommand;
+import maidchan.exceptions.CommandNotFoundException;
+import maidchan.exceptions.TaskException;
+import maidchan.task.Deadline;
+import maidchan.task.Event;
+import maidchan.task.ToDo;
 
 public class Parser {
     public Command parseCommand(String command) throws CommandNotFoundException, TaskException {

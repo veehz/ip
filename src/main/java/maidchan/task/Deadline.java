@@ -1,6 +1,6 @@
-package task;
+package maidchan.task;
 
-import exceptions.TaskException;
+import maidchan.exceptions.TaskException;
 
 /**
  * Represents a task with a deadline.

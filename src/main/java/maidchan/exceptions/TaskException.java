@@ -1,4 +1,4 @@
-package exceptions;
+package maidchan.exceptions;
 
 /**
  * Exception thrown when there is an error when handling a task operation.

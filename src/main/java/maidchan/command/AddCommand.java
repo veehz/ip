@@ -1,10 +1,10 @@
-package command;
+package maidchan.command;
 
-import exceptions.TaskException;
-import storage.Storage;
-import task.Task;
-import task.TaskList;
-import ui.Ui;
+import maidchan.exceptions.TaskException;
+import maidchan.storage.Storage;
+import maidchan.task.Task;
+import maidchan.task.TaskList;
+import maidchan.ui.Ui;
 
 public class AddCommand extends Command {
     private Task task;
