@@ -45,9 +45,11 @@ public class Task {
         }
     }
 
-    /**
-     * Mark this task as done.
-     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /** Mark this task as done. */
     public void mark() {
         this.isDone = true;
     }
