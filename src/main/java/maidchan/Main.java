@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private MaidChan maidchan = new MaidChan();
+    private final MaidChan maidchan = new MaidChan();
 
     @Override
     public void start(Stage stage) {

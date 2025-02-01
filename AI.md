@@ -28,3 +28,5 @@
     - Saved *a lot* of time, but still needs quite a lot of manual adjustments/reprompts.
     - Can be used to generate tests very quickly
         - Works on parameterized tests as well to cover more cases.
+    - Can be used to refactor very tedious tasks (e.g. "remove all occurances of Ui").
+        - It will also change JavaDoc accordingly.
