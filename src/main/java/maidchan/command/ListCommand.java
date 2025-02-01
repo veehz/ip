@@ -1,26 +1,22 @@
 package maidchan.command;
 
-import java.util.ArrayList;
-
 import maidchan.storage.Storage;
 import maidchan.task.TaskList;
-import maidchan.ui.Ui;
 
 /**
  * Represents a command to list tasks.
  */
 public class ListCommand extends Command {
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         if (tasks.getTasks().isEmpty()) {
-            ui.sendMessage("You have no tasks in the list.");
+            return "You have no tasks in the list.";
         } else {
-            ArrayList<String> messages = new ArrayList<>();
-            messages.add("Here are the tasks in your list:");
+            StringBuilder message = new StringBuilder("Here are the tasks in your list:");
             for (int i = 0; i < tasks.getTasks().size(); i++) {
-                messages.add("\t" + (i + 1) + ". " + tasks.getTasks().get(i).toString());
+                message.append("\n\t").append(i + 1).append(". ").append(tasks.getTasks().get(i).toString());
             }
-            ui.sendMessage(messages);
+            return message.toString();
         }
     }
 }
