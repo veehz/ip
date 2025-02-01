@@ -2,6 +2,7 @@ package maidchan;
 
 import java.io.File;
 import java.util.Scanner;
+
 import maidchan.command.Command;
 import maidchan.exceptions.CommandNotFoundException;
 import maidchan.exceptions.MaidChanUnexpectedException;
