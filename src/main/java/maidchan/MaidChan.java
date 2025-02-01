@@ -30,8 +30,8 @@ public class MaidChan {
         ui = new Ui();
         ui.showWelcomeMessage();
 
-        storage = new Storage(
-                System.getProperty("user.dir") + File.separator + "data" + File.separator + "tasks.txt");
+        storage = new Storage(System.getProperty("user.dir") + File.separator + "data"
+                + File.separator + "tasks.txt");
         taskList = new TaskList();
         taskList.getTasks().addAll(storage.loadTodoList());
         parser = new Parser();
@@ -64,5 +64,12 @@ public class MaidChan {
         }
 
         scanner.close();
+    }
+
+    /**
+     * Generates a response for the user's chat message.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }
