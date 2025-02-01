@@ -43,4 +43,16 @@ public class MaidChan {
             return "An unexpected error occurred: " + e.getMessage();
         }
     }
+
+    /**
+     * Checks if the input is an exit command.
+     */
+    public boolean isExitCommand(String input) {
+        try {
+            Command command = parser.parseCommand(input);
+            return command.isExit();
+        } catch (TaskException | CommandNotFoundException | MaidChanUnexpectedException e) {
+            return false;
+        }
+    }
 }
