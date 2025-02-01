@@ -22,6 +22,9 @@ public class MarkCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Storage storage) throws TaskException {
+        if (taskIndex < 0 || taskIndex >= tasks.getTasks().size()) {
+            throw new TaskException("The task index provided is out of bounds.");
+        }
         Task task = tasks.getTasks().get(taskIndex);
         task.mark();
         storage.saveTodoList(tasks.getTasks());
