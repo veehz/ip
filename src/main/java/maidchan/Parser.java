@@ -1,15 +1,19 @@
 package maidchan;
 
 import maidchan.command.AddCommand;
+import maidchan.command.AddNoteCommand;
 import maidchan.command.Command;
 import maidchan.command.DeleteCommand;
+import maidchan.command.DeleteNoteCommand;
 import maidchan.command.ExitCommand;
 import maidchan.command.FindCommand;
 import maidchan.command.ListCommand;
+import maidchan.command.ListNoteCommand;
 import maidchan.command.MarkCommand;
 import maidchan.command.UnmarkCommand;
 import maidchan.exceptions.CommandNotFoundException;
 import maidchan.exceptions.TaskException;
+import maidchan.note.Note;
 import maidchan.task.Deadline;
 import maidchan.task.Event;
 import maidchan.task.ToDo;
@@ -51,6 +55,12 @@ public class Parser {
                 return new AddCommand(new Event(description));
             case "bye":
                 return new ExitCommand();
+            case "addnote":
+                return new AddNoteCommand(new Note(description));
+            case "delnote":
+                return new DeleteNoteCommand(Integer.parseInt(description) - 1);
+            case "listnote":
+                return new ListNoteCommand();
             default:
                 throw new CommandNotFoundException(commandType);
             }
@@ -62,6 +72,8 @@ public class Parser {
                 throw new TaskException("Please specify a valid task number to unmark.");
             case "delete":
                 throw new TaskException("Please specify a valid task number to delete.");
+            case "delnote":
+                throw new TaskException("Please specify a valid note number to delete.");
             default:
                 throw new TaskException("Please specify a valid task number.");
             }
