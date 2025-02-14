@@ -44,33 +44,7 @@ public class Storage {
 
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] parts = line.split(" ", 3);
-                boolean isDone = parts[0].equals("1");
-                String command = parts[1];
-                String description = parts[2];
-
-                Task task;
-                switch (command) {
-                case ToDo.COMMAND_NAME:
-                    task = new ToDo(description);
-                    break;
-                case Deadline.COMMAND_NAME:
-                    task = new Deadline(description);
-                    break;
-                case Event.COMMAND_NAME:
-                    task = new Event(description);
-                    break;
-                default:
-                    assert false : "Unknown task type when loading file: " + command;
-                    throw new MaidChanUnexpectedException(
-                            "Unknown task type when loading file: " + command);
-                }
-
-                if (isDone) {
-                    task.mark();
-                }
-
+                Task task = getTask(scanner.nextLine());
                 tasks.add(task);
             }
         } catch (IOException | TaskException e) {
@@ -78,6 +52,34 @@ public class Storage {
         }
 
         return tasks;
+    }
+
+    private static Task getTask(String line) throws TaskException {
+        String[] parts = line.split(" ", 3);
+        boolean isDone = parts[0].equals("1");
+        String command = parts[1];
+        String description = parts[2];
+
+        Task task;
+        switch (command) {
+        case ToDo.COMMAND_NAME:
+            task = new ToDo(description);
+            break;
+        case Deadline.COMMAND_NAME:
+            task = new Deadline(description);
+            break;
+        case Event.COMMAND_NAME:
+            task = new Event(description);
+            break;
+        default:
+            throw new MaidChanUnexpectedException(
+                    "Unknown task type when loading file: " + command);
+        }
+
+        if (isDone) {
+            task.mark();
+        }
+        return task;
     }
 
     /**
