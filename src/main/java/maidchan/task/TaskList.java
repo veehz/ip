@@ -30,6 +30,7 @@ public class TaskList {
      * @param index the index of the task to remove
      */
     public void removeTask(int index) {
+        assert 0 <= index && index < tasks.size() : "Index out of bounds";
         tasks.remove(index);
     }
 
