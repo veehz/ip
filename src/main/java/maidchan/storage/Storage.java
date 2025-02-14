@@ -62,6 +62,7 @@ public class Storage {
                     task = new Event(description);
                     break;
                 default:
+                    assert false : "Unknown task type when loading file: " + command;
                     throw new MaidChanUnexpectedException(
                             "Unknown task type when loading file: " + command);
                 }

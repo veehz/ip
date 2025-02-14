@@ -20,6 +20,7 @@ public class Task {
     public Task(String description) throws TaskException {
         setDescription(description);
         this.isDone = false;
+        assert !this.description.isEmpty() : "The description of a task cannot be empty.";
     }
 
     private String getCommandName() throws NoSuchFieldException, IllegalAccessException {
