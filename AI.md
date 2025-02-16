@@ -30,3 +30,4 @@
         - Works on parameterized tests as well to cover more cases.
     - Can be used to refactor very tedious tasks (e.g. "remove all occurances of Ui").
         - It will also change JavaDoc accordingly.
+6. Used copilot chat to generate README.md user guide.
